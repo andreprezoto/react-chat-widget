@@ -30,22 +30,35 @@ const ChatWidget = () => {
         </button>
       )}
       {isOpen && (
-        <div className="bg-white rounded-lg shadow-xl w-80 h-96 flex flex-col">
-          <div className="bg-blue-500 text-white p-2 rounded-t-lg flex justify-between items-center">
-            <h3 className="font-bold">Chat</h3>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="text-white hover:text-gray-200"
-            >
-              X
-            </button>
-          </div>
+        <div
+          style={{ width: "500px", height: "600px" }}
+          className="bg-white rounded-lg shadow-xl flex flex-col"
+        >
           <iframe
             src="https://app.3mindtecnologia.com.br/version-01bgy/widget_chat"
             title="Chat"
-            className="flex-grow w-full"
+            className="w-full h-full rounded-lg"
             frameBorder="0"
           ></iframe>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 bg-white rounded-full p-1"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
         </div>
       )}
     </div>
