@@ -9,7 +9,6 @@ const ChatWidget = ({
   const [userIp, setUserIp] = useState("");
 
   useEffect(() => {
-    // Função para obter o IP do usuário
     const fetchIp = async () => {
       try {
         const response = await fetch("https://api.ipify.org?format=json");
@@ -51,7 +50,7 @@ const ChatWidget = ({
   const Spinner = () => (
     <div className="flex justify-center items-center h-full">
       <svg
-        className="animate-spin h-10 w-10 text-custom-orange"
+        className="animate-spin h-10 w-10 text-[#FF7000]"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
@@ -73,15 +72,9 @@ const ChatWidget = ({
     </div>
   );
 
-  const getCurrentUrlWithParams = () => {
-    return window.location.href;
-  };
-
   const getIframeUrl = () => {
-    const baseUrl =
-      "https://app.3mindtecnologia.com.br/version-01bgy/widget_chat";
-    const currentUrl = encodeURIComponent(getCurrentUrlWithParams());
-    return `${baseUrl}?userIp=${userIp}&currentUrl=${currentUrl}`;
+    const currentUrl = encodeURIComponent(window.location.href);
+    return `https://app.3mindtecnologia.com.br/version-01bgy/widget_chat?userIp=${userIp}&currentUrl=${currentUrl}`;
   };
 
   return (
@@ -98,7 +91,7 @@ const ChatWidget = ({
           )}
           <button
             onClick={() => setIsOpen(true)}
-            className="bg-custom-orange hover:bg-custom-orange/80 text-white rounded-full p-3 shadow-lg"
+            className="bg-[#FF7000] hover:bg-[#FF7000]/80 text-white rounded-full p-3 shadow-lg"
           >
             <MessageIcon />
           </button>
