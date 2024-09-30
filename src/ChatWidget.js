@@ -37,7 +37,7 @@ const ChatWidget = ({
   const Spinner = () => (
     <div className="flex justify-center items-center h-full">
       <svg
-        className="animate-spin h-10 w-10 text-[#FF7000]"
+        className="animate-spin h-10 w-10 text-custom-orange"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
@@ -73,7 +73,7 @@ const ChatWidget = ({
           )}
           <button
             onClick={() => setIsOpen(true)}
-            className="bg-[#FF7000] hover:bg-[#FF7000] text-white rounded-full p-3 shadow-lg"
+            className="bg-custom-orange hover:bg-custom-orange/80 text-white rounded-full p-3 shadow-lg"
           >
             <MessageIcon />
           </button>
