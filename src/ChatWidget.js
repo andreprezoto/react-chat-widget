@@ -1,7 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const ChatWidget = () => {
+const ChatWidget = ({
+  chatMessage = "Precisa de ajuda? Clique aqui para conversar!",
+}) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showBalloon, setShowBalloon] = useState(false);
+
+  useEffect(() => {
+    if (!isOpen) {
+      const timer = setTimeout(() => {
+        setShowBalloon(true);
+      }, 2000);
+      return () => clearTimeout(timer);
+    } else {
+      setShowBalloon(false);
+    }
+  }, [isOpen]);
 
   const MessageIcon = () => (
     <svg
@@ -22,12 +36,22 @@ const ChatWidget = () => {
   return (
     <div className="fixed bottom-4 right-4">
       {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-3 shadow-lg"
-        >
-          <MessageIcon />
-        </button>
+        <div className="relative">
+          <button
+            onClick={() => setIsOpen(true)}
+            className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-3 shadow-lg"
+          >
+            <MessageIcon />
+          </button>
+          {showBalloon && (
+            <div className="absolute bottom-14 right-0 bg-white text-gray-800 p-3 rounded-lg shadow-lg max-w-xs animate-fade-in">
+              <div className="relative">
+                {chatMessage}
+                <div className="absolute -bottom-2 right-3 w-4 h-4 bg-white transform rotate-45"></div>
+              </div>
+            </div>
+          )}
+        </div>
       )}
       {isOpen && (
         <div
