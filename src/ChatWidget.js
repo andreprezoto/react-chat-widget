@@ -6,8 +6,22 @@ const ChatWidget = ({
   const [isOpen, setIsOpen] = useState(false);
   const [showBalloon, setShowBalloon] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [userIp, setUserIp] = useState("");
 
   useEffect(() => {
+    // Função para obter o IP do usuário
+    const fetchIp = async () => {
+      try {
+        const response = await fetch("https://api.ipify.org?format=json");
+        const data = await response.json();
+        setUserIp(data.ip);
+      } catch (error) {
+        console.error("Erro ao obter o IP:", error);
+      }
+    };
+
+    fetchIp();
+
     if (!isOpen) {
       const timer = setTimeout(() => {
         setShowBalloon(true);
@@ -59,6 +73,17 @@ const ChatWidget = ({
     </div>
   );
 
+  const getCurrentUrlWithParams = () => {
+    return window.location.href;
+  };
+
+  const getIframeUrl = () => {
+    const baseUrl =
+      "https://app.3mindtecnologia.com.br/version-01bgy/widget_chat";
+    const currentUrl = encodeURIComponent(getCurrentUrlWithParams());
+    return `${baseUrl}?userIp=${userIp}&currentUrl=${currentUrl}`;
+  };
+
   return (
     <div className="fixed bottom-4 right-4 flex items-end">
       {!isOpen && (
@@ -86,7 +111,7 @@ const ChatWidget = ({
         >
           {isLoading && <Spinner />}
           <iframe
-            src="https://app.3mindtecnologia.com.br/version-01bgy/widget_chat"
+            src={getIframeUrl()}
             title="Chat"
             className="w-full h-full rounded-lg"
             frameBorder="0"
