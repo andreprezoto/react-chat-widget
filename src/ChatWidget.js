@@ -34,24 +34,24 @@ const ChatWidget = ({
   );
 
   return (
-    <div className="fixed bottom-4 right-4">
+    <div className="fixed bottom-4 right-4 flex items-end">
       {!isOpen && (
-        <div className="relative">
+        <>
+          {showBalloon && (
+            <div className="mr-4 mb-2 bg-white text-gray-800 p-4 rounded-lg shadow-lg max-w-sm animate-fade-in">
+              <div className="relative">
+                {chatMessage}
+                <div className="absolute -right-8 bottom-2 w-4 h-4 bg-white transform rotate-45"></div>
+              </div>
+            </div>
+          )}
           <button
             onClick={() => setIsOpen(true)}
             className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-3 shadow-lg"
           >
             <MessageIcon />
           </button>
-          {showBalloon && (
-            <div className="absolute bottom-14 right-0 bg-white text-gray-800 p-3 rounded-lg shadow-lg max-w-xs animate-fade-in">
-              <div className="relative">
-                {chatMessage}
-                <div className="absolute -bottom-2 right-3 w-4 h-4 bg-white transform rotate-45"></div>
-              </div>
-            </div>
-          )}
-        </div>
+        </>
       )}
       {isOpen && (
         <div
